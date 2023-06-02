@@ -37,7 +37,7 @@ app.use("/api/v1", bookRouter)
 app.use("*", (req, res) => {
     res.status(404).json({
         status: "failed",
-        message: "Data not found"
+        message: "404, Data not found"
     })
 })
 

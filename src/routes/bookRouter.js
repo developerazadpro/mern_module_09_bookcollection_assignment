@@ -2,7 +2,7 @@ const express = require("express")
 const BookController = require("../controllers/BookController")
 const router = express.Router()
 
-router.get("/books", BookController.getAllBooks);
-
-module.exports = router
+router.get("/books",    BookController.getAllBooks);
+router.get("/books/:id", BookController.getSingleBook);
+module.exports = router;
 
