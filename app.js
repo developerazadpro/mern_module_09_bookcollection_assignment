@@ -2,6 +2,8 @@ const { readdirSync } = require("fs")
 const path = require("path")
 const express = require("express")
 const mongoose = require("mongoose")
+const bookRouter = require("./src/routes/bookRouter")
+
 const app = express()
 const helmet = require("helmet")
 const dotenv = require("dotenv")
@@ -18,12 +20,20 @@ app.use(express.urlencoded({extended:false}))
 app.use(helmet())
 
 
-// server
-const port = process.env.PORT || 8000
 
-
+console.log(process.env.DATABASE)
 // connect to DB and start server
 mongoose.connect(process.env.DATABASE).catch(error => console.log(error))
-app.listen(port, () => {
-    console.log(`Server listening on port ${port}`)
+
+
+app.use("/api/v1", bookRouter)
+
+// undefined route
+app.use("*", (req, res) => {
+    res.status(404).json({
+        status: "failed",
+        message: "Data not found"
+    })
 })
+
+module.exports = app

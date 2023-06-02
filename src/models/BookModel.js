@@ -1,3 +1,5 @@
+const express = require("express")
+const app = express()
 const mongoose = require("mongoose")
 const bookSchema = new mongoose.Schema(
     {
@@ -18,5 +20,5 @@ const bookSchema = new mongoose.Schema(
     },
     {timestamps:true, versionKey:false}
 )
-const Book = mongoose.model('Book', bookSchema)
-module.exports = Book
+const BookModel = mongoose.model('Book', bookSchema)
+module.exports = BookModel
