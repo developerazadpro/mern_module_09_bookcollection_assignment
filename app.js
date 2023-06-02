@@ -23,7 +23,12 @@ app.use(helmet())
 
 console.log(process.env.DATABASE)
 // connect to DB and start server
-mongoose.connect(process.env.DATABASE).catch(error => console.log(error))
+mongoose
+        .connect(process.env.DATABASE)
+        .then(()=>{
+            console.log("Database Connected with mongoDB Server.")
+        })
+        .catch(error => console.log(error))
 
 
 app.use("/api/v1", bookRouter)
