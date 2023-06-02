@@ -55,3 +55,18 @@ exports.updateBook = async(req, res) => {
         res.status(500).json({error: "Internal server error"})
     }
 }
+
+// delete book
+exports.deleteBook = async(req, res) => {
+    try{
+        const book = await BookModel.findByIdAndDelete(req.params.id)
+        if(book){
+            res.status(200).json("Book deleted")
+        }else {
+            res.status(404).json({ message: 'Book not found' });
+        }
+    }catch(error){
+        console.log("Error deleting book", error)
+        res.status(500).json({error: "Internal server error"})
+    }
+}
