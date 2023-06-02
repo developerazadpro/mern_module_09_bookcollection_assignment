@@ -29,3 +29,14 @@ exports.getSingleBook = async(req, res) => {
     }
 }
 
+// save book
+exports.saveBook = async (req, res) => {
+    try{
+        const book = new BookModel(req.body);
+        const savedBook = await book.save();
+        res.status(200).json(savedBook)
+    }catch(error){
+        console.log("Error saving data", error)
+        res.status(500).json({error: "Internal server error"})
+    }
+}
