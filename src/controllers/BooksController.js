@@ -1,10 +1,10 @@
 // import book model
-const BookModel = require("../models/BookModel")
+const BooksModel = require("../models/BooksModel")
 
 // get all books
 exports.getAllBooks = async(req, res) => {
     try{
-        const books = await BookModel.find({});
+        const books = await BooksModel.find({});
         if(books){
             res.status(200).json({data:books})
         }
@@ -17,7 +17,7 @@ exports.getAllBooks = async(req, res) => {
 // get single book
 exports.getSingleBook = async(req, res) => {
     try{
-        const book = await BookModel.findById(req.params.id)
+        const book = await BooksModel.findById(req.params.id)
         if(book){
             res.status(200).json({book})
         }else{
@@ -32,7 +32,7 @@ exports.getSingleBook = async(req, res) => {
 // save book
 exports.saveBook = async (req, res) => {
     try{
-        const book = new BookModel(req.body);
+        const book = new BooksModel(req.body);
         const savedBook = await book.save();
         res.status(200).json(savedBook)
     }catch(error){
@@ -44,7 +44,7 @@ exports.saveBook = async (req, res) => {
 // update single book
 exports.updateBook = async(req, res) => {
     try{
-        const book = await BookModel.findByIdAndUpdate(req.params.id, req.body)
+        const book = await BooksModel.findByIdAndUpdate(req.params.id, req.body)
         if(book){
             res.status(200).json({book})
         }else{
@@ -59,7 +59,7 @@ exports.updateBook = async(req, res) => {
 // delete book
 exports.deleteBook = async(req, res) => {
     try{
-        const book = await BookModel.findByIdAndDelete(req.params.id)
+        const book = await BooksModel.findByIdAndDelete(req.params.id)
         if(book){
             res.status(200).json("Book deleted")
         }else {
