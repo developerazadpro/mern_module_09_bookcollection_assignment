@@ -9,7 +9,7 @@ exports.getAllBooks = async(req, res) => {
             res.status(200).json({data:books})
         }
     }catch (error){
-        console.log("Error fetching data", error)
+        console.log("Error fetching book", error)
         res.status(500).json({error: "Internal server error"})
     }
 }
@@ -24,7 +24,7 @@ exports.getSingleBook = async(req, res) => {
             res.status(404).json({ message: 'Book not found' });
         }
     }catch (error){
-        console.log("Error fetching data", error)
+        console.log("Error fetching book", error)
         res.status(500).json({error: "Internal server error"})
     }
 }
@@ -36,7 +36,22 @@ exports.saveBook = async (req, res) => {
         const savedBook = await book.save();
         res.status(200).json(savedBook)
     }catch(error){
-        console.log("Error saving data", error)
+        console.log("Error saving book", error)
+        res.status(500).json({error: "Internal server error"})
+    }
+}
+
+// update single book
+exports.updateBook = async(req, res) => {
+    try{
+        const book = await BookModel.findByIdAndUpdate(req.params.id, req.body)
+        if(book){
+            res.status(200).json({book})
+        }else{
+            res.status(404).json({ message: 'Book not found' });
+        }
+    }catch(error){
+        console.log("Error updating book", error)
         res.status(500).json({error: "Internal server error"})
     }
 }
